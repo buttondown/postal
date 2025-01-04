@@ -573,7 +573,8 @@ module Postal
       # Should this message be parsed?
       #
       def should_parse?
-        parsed? == false && headers["x-amp"] != "skip"
+        # Header values are always arrays, so we check for `['skip']` instead of `'skip'`
+        parsed? == false && headers["x-amp"] != ["skip"]
       end
 
       private
