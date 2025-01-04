@@ -1,4 +1,4 @@
-# This is an example Postal configuration file for use in 
+# This is an example Postal configuration file for use in
 # test environments. For a production example, see
 # the https://github.com/postalserver/install repository.
 
@@ -7,14 +7,14 @@ version: 2
 main_db:
   host: 127.0.0.1
   username: root
-  password: 
+  password:
   database: postal-test
 
 message_db:
   host: 127.0.0.1
   username: root
-  password: 
-  prefix: postal-test
+  password:
+  prefix: postal
 
 logging:
   enabled: false
