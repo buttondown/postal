@@ -310,7 +310,7 @@ module Postal
       end
 
       #
-      # Return the HTML body with any tracking links
+      # Return the HTML body with the tracking image removed.
       #
       def html_body_without_tracking_image
         html_body.gsub(/<p class=['"]ampimg['"].*?<\/p>/, "")
@@ -573,8 +573,15 @@ module Postal
       # Should this message be parsed?
       #
       def should_parse?
-        # Header values are always arrays, so we check for `['skip']` instead of `'skip'`
-        parsed? == false && headers["x-amp"] != ["skip"]
+        parsed? == false
+      end
+
+      def track_clicks?
+        headers["x-track-clicks"] != ["no"]
+      end
+
+      def track_loads?
+        headers["x-track-opens"] != ["no"]
       end
 
       private
