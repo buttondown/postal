@@ -12,4 +12,13 @@ module GeneralHelpers
     server.message_db.message(result[:id])
   end
 
+  def create_html_message(server, html, to = "test@example.com", override_attributes = {})
+    domain = create(:domain, owner: server)
+    attributes = { from: "test@#{domain.name}", subject: "Test HTML Message" }.merge(override_attributes)
+    attributes[:to] = to
+    attributes[:html_body] = html
+    message = OutgoingMessagePrototype.new(server, "127.0.0.1", "testsuite", attributes)
+    result = message.create_message(to)
+    server.message_db.message(result[:id])
+  end
 end
