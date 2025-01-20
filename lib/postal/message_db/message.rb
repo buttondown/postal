@@ -552,7 +552,7 @@ module Postal
       def parse_content
         parse_result = Postal::MessageParser.new(self)
         if parse_result.actioned?
-          # Somethign was changed, update the raw message
+          # Something was changed, update the raw message
           @database.update(raw_table, { data: parse_result.new_body }, where: { id: raw_body_id })
           @database.update(raw_table, { data: parse_result.new_headers }, where: { id: raw_headers_id })
           @raw = parse_result.new_body
@@ -577,11 +577,11 @@ module Postal
       end
 
       def track_clicks?
-        headers["x-track-clicks"] != ["no"]
+        raw_content.include?("x-track-clicks")
       end
 
       def track_loads?
-        headers["x-track-opens"] != ["no"]
+        raw_content.include?("x-track-loads")
       end
 
       private
